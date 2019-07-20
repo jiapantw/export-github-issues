@@ -1,0 +1,37 @@
+{
+  "name": "@jiapantw/export-github-issues",
+  "version": "1.0.0",
+  "description": "Clone GitHub Issues locally for offline perusal",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard 'src/*.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jiapantw/export-github-issues.git"
+  },
+  "keywords": [
+    "GitHub",
+    "Issues",
+    "Offline"
+  ],
+  "author": "Justin Tien (justintien)",
+  "bin": {
+    "export-github-issues": "src/cli.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "cpr": "^1.1.1",
+    "handlebars": "^4.0.5",
+    "marked": "^0.3.5",
+    "mkdirp": "^0.5.1",
+    "run-parallel": "^1.1.6",
+    "yargs": "^4.7.1"
+  },
+  "devDependencies": {},
+  "bugs": {
+    "url": "https://github.com/jiapantw/export-github-issues/issues"
+  },
+  "homepage": "https://github.com/jiapantw/export-github-issues"
+}

@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="lib/jquery.js"></script>
+    <script type="text/javascript" src="lib/jquery.emoji.js"></script>
+    <title>{{title}}</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <p>
+          <span class="badge {{state}}">{{state}}</span>
+          <span class="url"><a href="{{url}}">{{quicklink}}</a></span>
+        </p>
+        <h1>{{title}}</h1>
+      </header>
+      <div class="comments">
+        <div class="comment">
+          <div class="meta">
+            <a class="person" href="https://github.com/{{created_by}}">{{created_by}}</a>
+            <time>{{created_at}}</time>
+          </div>
+          <div class="body">
+            {{# if body}}{{{body}}}{{else}}<i>No body given.</i>{{/if}}
+          </div>
+        </div>
+
+        {{#comments}}
+        <div class="comment">
+          <div class="meta">
+            <a class="person" href="{{user.html_url}}">
+              {{user.login}}
+            </a>
+            <time>{{created_at}}</time>
+          </div>
+          <div class="body">{{{body}}}</div>
+        </div>
+        {{/comments}}
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $('.comment').each(function(i, d){
+          $(d).emoji()
+        })
+      })
+    </script>
+
+  </body>
+</html>
