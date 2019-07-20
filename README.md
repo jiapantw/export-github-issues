@@ -17,7 +17,7 @@ This is a command line application, using [Node.js](http://nodejs.org/), that fe
 - install
 
 ```sh
-npm install -g export-github-issues
+npm install -g @jiapantw/export-github-issues
 ```
 
 > github_api_token, you can to github generate api_token for temp
