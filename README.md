@@ -1,5 +1,7 @@
 # export-github-issues
 
+> This is based on https://github.com/jlord/offline-issues, and removed `ghauth` (use options `--token` to auth)
+
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
 _Get your GitHub Issues offline! In Markdown and HTML._
