@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+// Copyright (c) 2015, Jessica Lord All rights reserved.
+// This code is licensed under BSD license (see https://github.com/jlord/offline-issues/blob/master/LICENSE.md for details)
+
 var getIssues = require('./index.js')
 
 var options = require('yargs')
