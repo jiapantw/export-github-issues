@@ -28,6 +28,7 @@
     "handlebars": "^4.7.3",
     "marked": "^0.8.0",
     "mkdirp": "^0.5.1",
+    "promise-throttle": "^1.1.0",
     "run-parallel": "^1.1.6",
     "yargs": "^4.7.1"
   },
