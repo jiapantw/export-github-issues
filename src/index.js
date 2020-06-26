@@ -4,7 +4,12 @@
 var fs = require('fs')
 
 var axios = require('axios')
-
+var PromiseThrottle = require('promise-throttle');
+// github limit
+var promiseThrottle = new PromiseThrottle({
+    requestsPerSecond: 5000/3600,           // up to 1 request per second
+    promiseImplementation: Promise  // the Promise library you are using
+});
 var runParallel = require('run-parallel')
 var writemarkdown = require('./writemarkdown.js')
 var writehtml = require('./writehtml.js')
@@ -55,13 +60,13 @@ const getIssues = (repo, cb) => {
 
   const url = `${githubApiBaseUrl}/repos/${repo.owner.id}/${repo.name}/issues/${repo.issue.filter.id}`
   console.log('getIssues', url)
-  axios(url, {
+  promiseThrottle.add(() => axios(url, {
     headers
   }).then(res => {
     loadIssue(res.data, repo, cb)
   }).catch(err => {
     return cb(err, 'Error in request for issue.')
-  })
+  }));
 }
 
 const loadIssue = (body, repo, cb) => {
@@ -93,7 +98,7 @@ const getComments = (issue, repo, cb) => {
     url = `${githubApiBaseUrl}/repos/${repo.owner.id}/${repo.name}/issues/${repo.issue.filter.id}/comments`
   }
   console.log('getComments', url)
-  axios(url, {
+  promiseThrottle.add(()=>axios(url, {
     headers,
   }).then(res => {
     issue.comments = res.data
@@ -104,20 +109,20 @@ const getComments = (issue, repo, cb) => {
     cb()
   }).catch(err => {
     return cb(err, 'Error in request for comments.')
-  })
+  }));
 }
 
 const writeData = (options, cb) => {
   var data = JSON.stringify(issueData, null, ' ')
   var count = JSON.parse(data).length
 
-  if (count > 250) {
-    console.log('Only processing the first 250 issues.')
-    var limit = 250
-    var excess = count - limit
-    var newData = JSON.parse(data).splice(excess, 250)
-    data = JSON.stringify(newData)
-  }
+  //if (count > 250) {
+  //  console.log('Only processing the first 250 issues.')
+  //  var limit = 250
+  //  var excess = count - limit
+  //  var newData = JSON.parse(data).splice(excess, 250)
+  //    data = JSON.stringify(newData)
+  // }
 
   fs.writeFile('comments.json', data, function (err) {
     if (err) return cb(err, 'Error in writing data file.')
@@ -134,7 +139,7 @@ const theRequestLoop = (repo, cb) => {
   let url = `${githubApiBaseUrl}/repos/${repo.owner.id}/${repo.name}${query}${pagenum}${limit}`
 
   console.log('theRequestLoop', url)
-  axios(url, {
+  promiseThrottle.add(()=>axios(url, {
     headers
   }).then(res => {
     const body = res.data
@@ -157,7 +162,7 @@ const theRequestLoop = (repo, cb) => {
     }
   }).catch(err => {
     return cb(err, 'Error in request for issue.')
-  })
+  }));
 }
 
 module.exports = function ({ token, ...options}, cb) {
