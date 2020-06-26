@@ -26,9 +26,7 @@ module.exports = function writehtml (options, cb) {
     var dest = 'html'
   }
 
-  mkdirp(dest, function (err) {
-    if (err) return cb(err, 'Error writing HTML directory.')
-  })
+  mkdirp.sync(dest)
 
   if (!options.noStatic) {
     var from = path.resolve(__dirname, '..', 'static')

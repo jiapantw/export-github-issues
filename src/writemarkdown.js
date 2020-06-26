@@ -14,9 +14,7 @@ module.exports = function writemarkdown (options, cb) {
     var dest = 'md'
   }
 
-  mkdirp(dest, function (err) {
-    if (err) return cb(err, 'Error creating md directory.')
-  })
+  mkdirp.sync(dest)
 
   var issues = fs.readFileSync('comments.json')
   issues = JSON.parse(issues)

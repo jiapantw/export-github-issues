@@ -24,13 +24,13 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.19.0",
-    "cpr": "^1.1.1",
+    "cpr": "^3.0.1",
     "handlebars": "^4.7.3",
-    "marked": "^0.8.0",
-    "mkdirp": "^0.5.1",
+    "marked": "^1.1.0",
+    "mkdirp": "^1.0.4",
     "promise-throttle": "^1.1.0",
     "run-parallel": "^1.1.6",
-    "yargs": "^4.7.1"
+    "yargs": "^15.3.1"
   },
   "devDependencies": {},
   "bugs": {
